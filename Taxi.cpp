@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 
 using namespace std;
 
@@ -6,9 +6,37 @@ int main()
 {
 	setlocale(LC_ALL, "Russian");
 	int people;
-	cout << "Введите количество сотрудников: ";
-	cin >> people;
-	cout << endl;
+
+	// ввод количества сотрудников
+	while (true)
+	{
+		cout << "Введите количество сотрудников (от 1 до 1000): ";
+		cin >> people;
+
+		// обработка ввода неверного типа данных
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cout << endl;
+			cout << "Неверный тип данных.\n" << "Повторите попытку." << endl;
+			cout << endl;
+		}
+
+		// обработка ввода числа, выходящего за пределы диапазона
+		else if (people < 1 || people > 1000)
+		{
+			cout << endl;
+			cout << "Введено число, которое не входит в заданный диапазон.\n" << "Повторите попытку." << endl;
+			cout << endl;
+		}
+
+		else
+		{
+			cout << endl;
+			break;
+		}
+	}
 
 	int* distance = new int[people];
 	int* money = new int[people];
@@ -18,17 +46,70 @@ int main()
 	// ввод расстояний
 	for (int i = 0; i < people; i++)
 	{
-		cout << "Введите расстояние " << i + 1 << "-го сотрудника: ";
-		cin >> distance[i];
+		while (true)
+		{
+			cout << "Введите расстояние " << i + 1 << "-го сотрудника (целое число от 1 до 1000): ";
+			cin >> distance[i];
+
+			// обработка ввода неверного типа данных
+			if (cin.fail())
+			{
+				cin.clear();
+				cin.ignore(1000, '\n');
+				cout << endl;
+				cout << "Неверный тип данных.\n" << "Повторите попытку." << endl;
+				cout << endl;
+			}
+
+			// обработка ввода числа, выходящего за пределы диапазона
+			else if (distance[i] < 1 || distance[i] > 1000)
+			{
+				cout << endl;
+				cout << "Введено число, которое не входит в заданный диапазон.\n" << "Повторите попытку." << endl;
+				cout << endl;
+			}
+
+			else
+			{
+				break;
+			}
+		}
 		number_emp[i] = i + 1;
 	}
-	cout << endl;
+		cout << endl;
 
 	// ввод тарифов
 	for (int i = 0; i < people; i++)
 	{
-		cout << "Введите тариф в такси #" << i + 1 << " (руб/км): ";
-		cin >> money[i];
+		while (true)
+		{
+			cout << "Введите тариф в такси #" << i + 1 << " (руб/км) (целое число от 1 до 10000): ";
+			cin >> money[i];
+
+			// обработка ввода неверного типа данных
+			if (cin.fail())
+			{
+				cin.clear();
+				cin.ignore(1000, '\n');
+				cout << endl;
+				cout << "Неверный тип данных.\n" << "Повторите попытку." << endl;
+				cout << endl;
+			}
+
+			// обработка ввода числа, выходящего за пределы диапазона
+			else if (money[i] < 1 || money[i] > 10000)
+			{
+				cout << endl;
+				cout << "Введено число, которое не входит в заданный диапазон.\n" << "Повторите попытку." << endl;
+				cout << endl;
+			}
+
+			else
+			{
+				break;
+			}
+		}
+
 		number_taxi[i] = i + 1;
 	}
 	cout << endl;
@@ -36,7 +117,6 @@ int main()
 	// сортировка
 	for (int i = 0; i < people; i++)
 	{
-
 		for (int j = 0; j < people - i - 1; j++)
 		{
 			// сортировка расстояний сотрудников по возрастанию
